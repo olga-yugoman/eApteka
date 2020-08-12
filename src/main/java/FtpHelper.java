@@ -8,7 +8,7 @@ public class FtpHelper {
 
     FTPClient ftp = new FTPClient();
 
-    public void upload (String host, String login, String password, String dir, File file, String target) throws IOException {
+    public String upload (String host, String login, String password, String dir, File file, String target) throws IOException {
         ftp.connect(host);
         showServerReply(ftp);
         ftp.login(login, password);
@@ -18,9 +18,13 @@ public class FtpHelper {
         ftp.enterLocalPassiveMode();
         ftp.storeFile(target, new FileInputStream(file));
         showServerReply(ftp);
+        String date = ftp.getModificationTime(file.getName());
+        showServerReply(ftp);
         ftp.logout();
         showServerReply(ftp);
         ftp.disconnect();
+
+        return date.substring(0, 8);
     }
 
     private static void showServerReply(FTPClient ftpClient) {
