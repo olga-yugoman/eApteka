@@ -9,15 +9,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Feature("Подготовка энва к тестированию.")
-public class FtpTest {
-    private final FtpHelper ftp = new FtpHelper();;
+public class FtpUploadPrices {
+    private final FtpHelper ftp = new FtpHelper();
+    private final File file = new File("src/test/resources/test-2.dbf");
 
     @Issue("ONE-9904")
     @ParameterizedTest
     @CsvFileSource(resources = "/properties.csv", numLinesToSkip = 1)
-    public void setUp(String host, String login, String password, String dir) throws Exception {
-        String dateModified = ftp.upload(host, login, password, dir,
-                new File("src/test/resources/test-2.dbf"), "test-2.dbf");
+    public void setUp(String host, String login, String password) throws Exception {
+        ftp.connectFtp(host, login, password);
+
+        //загрузка приходных накладных на ФТП
+        String dir = "/price";
+        ftp.upload(dir, file, "test-2.dbf");
+        String dateModified = ftp.getDateFileModified(file);
+        ftp.disconnectFtp();
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
         LocalDateTime now = LocalDateTime.now();
