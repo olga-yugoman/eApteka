@@ -41,6 +41,20 @@ test {
     }
 }
 
+task tearDown(type: Test) {
+    useJUnitPlatform {
+        includeTags 'AfterFunctionalTests'
+        excludeTags 'BeforeFunctionalTests'
+    }
+}
+
+task setUp(type: Test) {
+    useJUnitPlatform {
+        includeTags 'BeforeFunctionalTests'
+        excludeTags 'AfterFunctionalTests'
+    }
+}
+
 allure {
     version = "${allureVersion}"
     autoconfigure = true

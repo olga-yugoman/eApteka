@@ -1,6 +1,7 @@
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import org.junit.Assert;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -14,9 +15,10 @@ public class FtpUploadPrices {
     private final File file = new File("src/test/resources/test-2.dbf");
 
     @Issue("ONE-9904")
+    @Tag("BeforeFunctionalTests")
     @ParameterizedTest
     @CsvFileSource(resources = "/properties.csv", numLinesToSkip = 1)
-    public void setUp(String host, String login, String password) throws Exception {
+    public void ftpUploadPrices(String host, String login, String password) throws Exception {
         ftp.connectFtp(host, login, password);
 
         //загрузка приходных накладных на ФТП

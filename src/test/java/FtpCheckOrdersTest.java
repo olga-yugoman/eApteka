@@ -1,6 +1,7 @@
 import io.qameta.allure.Issue;
 import org.apache.commons.net.ftp.FTPFile;
 import org.junit.Assert;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -16,8 +17,9 @@ public class FtpCheckOrdersTest {
 
     @Issue("ONE-9959")
     @ParameterizedTest
+    @Tag("AfterFunctionalTests")
     @CsvFileSource(resources = "/properties.csv", numLinesToSkip = 1)
-    public void tearDown(String host, String login, String password) throws Exception {
+    public void ftpCheckOrderTest(String host, String login, String password) throws Exception {
         ftp.connectFtp(host, login, password);
         String dir = "/order";
         ftp.navigate(dir);
