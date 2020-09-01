@@ -49,7 +49,7 @@ public class FtpHelper {
         return date.substring(0, 8);
     }
 
-    @Step("Получить список файлов в папке {dir}")
+    @Step("Получить список файлов в текущей папке")
     public FTPFile[] getFilesList() throws IOException {
         return ftp.listFiles();
     }
