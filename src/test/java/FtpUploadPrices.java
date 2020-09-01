@@ -1,3 +1,4 @@
+import Helpers.FtpHelper;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import org.junit.Assert;

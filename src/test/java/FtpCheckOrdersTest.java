@@ -1,3 +1,4 @@
+import Helpers.FtpHelper;
 import io.qameta.allure.Issue;
 import org.apache.commons.net.ftp.FTPFile;
 import org.junit.Assert;
@@ -12,8 +13,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static Constants.FtpConstans.PRICE_DIRECTORY;
+
 public class FtpCheckOrdersTest {
-    private final FtpHelper ftp = new FtpHelper();;
+    private final FtpHelper ftp = new FtpHelper();
 
     @Issue("ONE-9959")
     @ParameterizedTest
@@ -21,8 +24,8 @@ public class FtpCheckOrdersTest {
     @CsvFileSource(resources = "/properties.csv", numLinesToSkip = 1)
     public void ftpCheckOrderTest(String host, String login, String password) throws Exception {
         ftp.connectFtp(host, login, password);
-        String dir = "/order";
-        ftp.navigate(dir);
+        //String dir = "/order";
+        ftp.navigate(PRICE_DIRECTORY);
         FTPFile[] files = ftp.getFilesList();
         List<String> dates = new ArrayList();
         for (FTPFile file : files) {
@@ -36,7 +39,7 @@ public class FtpCheckOrdersTest {
         LocalDateTime now = LocalDateTime.now();
         String today = dtf.format(now);
 
-        Assert.assertTrue(String.format("There is no file added on %s in %s directory!", today, dir),
+        Assert.assertTrue(String.format("There is no file added on %s in %s directory!", today, PRICE_DIRECTORY),
                 dates.contains(today));
     }
 }
