@@ -1,5 +1,7 @@
 import Helpers.FtpHelper;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
+import io.qameta.allure.Owner;
 import org.apache.commons.net.ftp.FTPFile;
 import org.junit.Assert;
 import org.junit.jupiter.api.Tag;
@@ -13,19 +15,21 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static Constants.FtpConstans.PRICE_DIRECTORY;
+import static Constants.FtpConstans.ORDER_DIRECTORY;
 
+@Feature("Проверяем выгрузку Заказов поставщиков на ФТП")
 public class FtpCheckOrdersTest {
     private final FtpHelper ftp = new FtpHelper();
 
     @Issue("ONE-9959")
     @ParameterizedTest
+    @Owner("o.yugoman@eapteka.ru")
     @Tag("AfterFunctionalTests")
     @CsvFileSource(resources = "/properties.csv", numLinesToSkip = 1)
     public void ftpCheckOrderTest(String host, String login, String password) throws Exception {
         ftp.connectFtp(host, login, password);
         //String dir = "/order";
-        ftp.navigate(PRICE_DIRECTORY);
+        ftp.navigate(ORDER_DIRECTORY);
         FTPFile[] files = ftp.getFilesList();
         List<String> dates = new ArrayList();
         for (FTPFile file : files) {
@@ -39,7 +43,7 @@ public class FtpCheckOrdersTest {
         LocalDateTime now = LocalDateTime.now();
         String today = dtf.format(now);
 
-        Assert.assertTrue(String.format("There is no file added on %s in %s directory!", today, PRICE_DIRECTORY),
+        Assert.assertTrue(String.format("There is no file added on %s in %s directory!", today, ORDER_DIRECTORY),
                 dates.contains(today));
     }
 }

@@ -1,6 +1,7 @@
 import Helpers.FtpHelper;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
+import io.qameta.allure.Owner;
 import org.junit.Assert;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -10,6 +11,8 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import static Constants.FtpConstans.PRICE_DIRECTORY;
+
 @Feature("Подготовка энва к тестированию.")
 public class FtpUploadPrices {
     private final FtpHelper ftp = new FtpHelper();
@@ -17,14 +20,14 @@ public class FtpUploadPrices {
 
     @Issue("ONE-9904")
     @Tag("BeforeFunctionalTests")
+    @Owner("o.yugoman@eapteka.ru")
     @ParameterizedTest
     @CsvFileSource(resources = "/properties.csv", numLinesToSkip = 1)
     public void ftpUploadPrices(String host, String login, String password) throws Exception {
         ftp.connectFtp(host, login, password);
 
         //загрузка приходных накладных на ФТП
-        String dir = "/price";
-        ftp.upload(dir, file, "test-2.dbf");
+        ftp.upload(PRICE_DIRECTORY, file, "test-2.dbf");
         String dateModified = ftp.getDateFileModified(file);
         ftp.disconnectFtp();
 
