@@ -29,6 +29,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '8.3.1.jre8-preview'
     compile group: 'org.aeonbits.owner', name: 'owner', version: '1.0.12'
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.21.Final'
 }
 
 tasks.withType(JavaCompile) {

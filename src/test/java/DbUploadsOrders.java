@@ -4,14 +4,12 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Owner;
 import org.aeonbits.owner.ConfigFactory;
+import org.junit.Assert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 @Feature("Перенос заказов для финального теста")
 public class DbUploadsOrders {
@@ -30,9 +28,7 @@ public class DbUploadsOrders {
         try (Connection connection = DriverManager.getConnection(connectionUrl);
              Statement statement = connection.createStatement();) {
             sqlHelper.transferOrdersToTheTestBase(statement);
-            System.out.println("Delete");
             statement.close();
-            connection.close();
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());

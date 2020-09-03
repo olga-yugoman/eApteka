@@ -45,3 +45,5 @@ allure.properties
 properties.csv
 dbproperties.csv
 *.dbf
+hibernate.cfg.xml
+sql.properties
