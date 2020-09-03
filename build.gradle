@@ -56,6 +56,14 @@ task setUp(type: Test) {
     }
 }
 
+task beforeFinal(type: Test) {
+    useJUnitPlatform {
+        includeTags 'BeforeFinal'
+        excludeTags 'AfterFunctionalTests'
+        excludeTags 'BeforeFunctionalTests'
+    }
+}
+
 allure {
     version = "${allureVersion}"
     autoconfigure = true

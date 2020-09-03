@@ -4,6 +4,7 @@ import io.qameta.allure.Issue;
 import io.qameta.allure.Owner;
 import org.apache.commons.net.ftp.FTPFile;
 import org.junit.Assert;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -22,13 +23,13 @@ public class FtpCheckOrdersTest {
     private final FtpHelper ftp = new FtpHelper();
 
     @Issue("ONE-9959")
-    @ParameterizedTest
     @Owner("o.yugoman@eapteka.ru")
     @Tag("AfterFunctionalTests")
+    @DisplayName("Проверяю наличие заказа в {host}")
+    @ParameterizedTest
     @CsvFileSource(resources = "/properties.csv", numLinesToSkip = 1)
     public void ftpCheckOrderTest(String host, String login, String password) throws Exception {
         ftp.connectFtp(host, login, password);
-        //String dir = "/order";
         ftp.navigate(ORDER_DIRECTORY);
         FTPFile[] files = ftp.getFilesList();
         List<String> dates = new ArrayList();

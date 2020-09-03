@@ -3,6 +3,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Owner;
 import org.junit.Assert;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -21,12 +22,11 @@ public class FtpUploadPrices {
     @Issue("ONE-9904")
     @Tag("BeforeFunctionalTests")
     @Owner("o.yugoman@eapteka.ru")
+    @DisplayName("Загружаю Прайс лист на ФТП - {host}")
     @ParameterizedTest
     @CsvFileSource(resources = "/properties.csv", numLinesToSkip = 1)
     public void ftpUploadPrices(String host, String login, String password) throws Exception {
         ftp.connectFtp(host, login, password);
-
-        //загрузка приходных накладных на ФТП
         ftp.upload(PRICE_DIRECTORY, file, "test-2.dbf");
         String dateModified = ftp.getDateFileModified(file);
         ftp.disconnectFtp();
