@@ -1,4 +1,4 @@
-package Constants;
+package сonstants;
 
 public class FtpConstans {
 

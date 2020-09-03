@@ -1,4 +1,4 @@
-package Helpers;
+package helpers;
 
 import io.qameta.allure.Step;
 import org.apache.commons.net.ftp.FTPClient;

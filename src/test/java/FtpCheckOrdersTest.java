@@ -1,4 +1,4 @@
-import Helpers.FtpHelper;
+import helpers.FtpHelper;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Owner;
@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static Constants.FtpConstans.ORDER_DIRECTORY;
+import static сonstants.FtpConstans.ORDER_DIRECTORY;
 
 @Feature("Проверяем выгрузку Заказов поставщиков на ФТП")
 public class FtpCheckOrdersTest {

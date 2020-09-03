@@ -1,4 +1,4 @@
-import Helpers.FtpHelper;
+import helpers.FtpHelper;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Issue;
 import io.qameta.allure.Owner;
@@ -12,7 +12,7 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static Constants.FtpConstans.PRICE_DIRECTORY;
+import static сonstants.FtpConstans.PRICE_DIRECTORY;
 
 @Feature("Подготовка энва к тестированию.")
 public class FtpUploadPrices {

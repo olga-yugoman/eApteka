@@ -1,11 +1,11 @@
-package Helpers;
+package helpers;
 
 import io.qameta.allure.Step;
 
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static Constants.SqlConstans.*;
+import static сonstants.SqlConstans.*;
 
 public class SqlHelper {
 
@@ -23,7 +23,7 @@ public class SqlHelper {
     }
 
     @Step("Импортируем заказы из прода")
-    public static void insertNewOrders(Statement statement) throws SQLException {
+    public static void transferOrdersToTheTestBase(Statement statement) throws SQLException {
         statement.execute(DELETE_FROM_T_ORDERS);
         statement.execute(DELETE_FROM_T_OREDERS_PARTNER);
         statement.execute(DELETE_FROM_T_OREDERS_PRODUCT);

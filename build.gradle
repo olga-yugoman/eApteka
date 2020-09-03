@@ -28,6 +28,7 @@ dependencies {
     testImplementation "ch.qos.logback:logback-classic:1.2.3"
     testCompile 'junit:junit:4.12'
     compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '8.3.1.jre8-preview'
+    compile group: 'org.aeonbits.owner', name: 'owner', version: '1.0.12'
 }
 
 tasks.withType(JavaCompile) {
