@@ -2,7 +2,9 @@ package configuration;
 
 import org.aeonbits.owner.Config;
 
-@Config.Sources("classpath:sql.properties")
+@Config.Sources({
+        "file://s11dev/backup/javaproperties/sql.properties",
+        "classpath:sql.properties"})
 public interface SqlConfig extends Config {
 
     @Key("sql.servername")
